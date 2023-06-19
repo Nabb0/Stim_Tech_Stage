@@ -1,0 +1,100 @@
+Nome: Franco
+Cognome: Dallara
+IBAN: IT22G0911802828638328716550
+Data: 1989-11-28
+Numero di telefono: 3757289534
+Nome: Massimo
+Cognome: Ponti
+IBAN: IT18W8034292104481328055001
+Data: 2021-01-18
+Numero di telefono: +39 057245552
+Nome: Donato
+Cognome: Berrè
+IBAN: IT46C0861777507940288399049
+Data: 1987-02-07
+Numero di telefono: +39 016575440
+Nome: Irma
+Cognome: Grossi
+IBAN: IT52Y0357680245497703784766
+Data: 2000-03-15
+Numero di telefono: +39 3736024339
+Nome: Alessia
+Cognome: Inzaghi
+IBAN: IT87S3236428872725803131321
+Data: 1981-01-23
+Numero di telefono: 363799366
+Nome: Fernanda
+Cognome: Castellitto
+IBAN: IT77G0817953418013202089394
+Data: 2012-08-16
+Numero di telefono: +39 3371302134
+Nome: Achille
+Cognome: Balotelli
+IBAN: IT21A8964054634106625019577
+Data: 2020-09-12
+Numero di telefono: +39 3340716244
+Nome: Giorgio
+Cognome: Alighieri
+IBAN: IT14J1519202636883865277705
+Data: 1998-03-11
+Numero di telefono: +39 054422712
+Nome: Antonina
+Cognome: Faranda
+IBAN: IT07Q5630412441332153455987
+Data: 2001-10-27
+Numero di telefono: +39 0532701415
+Nome: Rosario
+Cognome: Segni
+IBAN: IT38O7106928503256334884185
+Data: 1980-12-03
+Numero di telefono: +39 34704083180
+Nome: Gastone
+Cognome: Bernardini
+IBAN: IT24X2658564212392332035647
+Data: 1982-07-12
+Numero di telefono: 3757350403
+Nome: Coluccio
+Cognome: Viviani
+IBAN: IT06V7548083700894609986605
+Data: 1996-12-06
+Numero di telefono: +39 09750935869
+Nome: Gabriella
+Cognome: Varano
+IBAN: IT03V2159643755478463515322
+Data: 2011-10-06
+Numero di telefono: 3908931128
+Nome: Pomponio
+Cognome: Quasimodo
+IBAN: IT62Z0418512675125175253843
+Data: 1994-04-07
+Numero di telefono: 3757468820
+Nome: Ugolino
+Cognome: Tomasini
+IBAN: IT46K5437180682756522779430
+Data: 2021-08-10
+Numero di telefono: 04319743636
+Nome: Bianca
+Cognome: Bongiorno
+IBAN: IT33Q5910847349340989270366
+Data: 2000-07-18
+Numero di telefono: +39 0461274115
+Nome: Micheletto
+Cognome: Renzi
+IBAN: IT92X9428267733656148257548
+Data: 1987-05-20
+Numero di telefono: 0373878223
+Nome: Benedetto
+Cognome: Federici
+IBAN: IT45J6523854350322959056872
+Data: 2013-04-11
+Numero di telefono: +39 03644366006
+Nome: Domenico
+Cognome: Barese
+IBAN: IT14Y5014754707952219213232
+Data: 2006-11-12
+Numero di telefono: +39 3512370193
+Nome: Nanni
+Cognome: Bragadin
+IBAN: IT47V9390981684727103408033
+Data: 1996-05-26
+Numero di telefono: +39 377933526

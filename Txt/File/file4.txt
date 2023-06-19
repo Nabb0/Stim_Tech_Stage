@@ -1,0 +1,100 @@
+Nome: Ernesto
+Cognome: Pininfarina
+IBAN: IT49P8652299742521727980849
+Data: 1982-07-10
+Numero di telefono: +39 0322942337
+Nome: Rosario
+Cognome: Pietrangeli
+IBAN: IT42D8284586333700499024181
+Data: 2015-01-05
+Numero di telefono: +39 036288333
+Nome: Ermanno
+Cognome: Tomasetti
+IBAN: IT51D5353539234844558203877
+Data: 1995-10-10
+Numero di telefono: 01258161746
+Nome: Matteo
+Cognome: Giannuzzi
+IBAN: IT79D5920418808804879908242
+Data: 2001-10-02
+Numero di telefono: 0371441228
+Nome: Beatrice
+Cognome: Marangoni
+IBAN: IT23H8348988759400835646370
+Data: 1976-02-15
+Numero di telefono: +39 0910230558
+Nome: Lucrezia
+Cognome: Vento
+IBAN: IT86L2364031519579644394835
+Data: 1994-12-01
+Numero di telefono: +39 0811736065
+Nome: Imelda
+Cognome: Mazzi
+IBAN: IT32S0447195099108042424632
+Data: 1975-11-20
+Numero di telefono: +39 09628931957
+Nome: Flavia
+Cognome: Toscanini
+IBAN: IT03Z5313473284591937176811
+Data: 1976-10-25
+Numero di telefono: 016176212
+Nome: Caterina
+Cognome: Gioberti
+IBAN: IT05C1552758540770457313102
+Data: 1992-08-15
+Numero di telefono: +39 0883848674
+Nome: Maria
+Cognome: Platini
+IBAN: IT20S7250372494780279934276
+Data: 1971-06-23
+Numero di telefono: 07364085302
+Nome: Antonina
+Cognome: Canevascini
+IBAN: IT31A2448835781977870748256
+Data: 1979-11-09
+Numero di telefono: 0595651550
+Nome: Ivan
+Cognome: Corbo
+IBAN: IT14G1013209229800825858523
+Data: 1979-10-13
+Numero di telefono: 033212816
+Nome: Ernesto
+Cognome: Cardano
+IBAN: IT07E2333668826996918776017
+Data: 1975-05-28
+Numero di telefono: 0516671032
+Nome: Greca
+Cognome: Casalodi
+IBAN: IT03J7532947588767002502256
+Data: 1979-12-22
+Numero di telefono: +39 3553403584
+Nome: Giuseppe
+Cognome: Govoni
+IBAN: IT81I1794693572394140183510
+Data: 1994-06-06
+Numero di telefono: +39 072142019
+Nome: Giada
+Cognome: Fornaciari
+IBAN: IT52B0100271548012878360835
+Data: 1992-11-19
+Numero di telefono: +39 331153428
+Nome: Eraldo
+Cognome: Sandi
+IBAN: IT15P7161933206663621901041
+Data: 2014-01-06
+Numero di telefono: +39 3824571103
+Nome: Ludovico
+Cognome: Fibonacci
+IBAN: IT22X7522617574883394696312
+Data: 1972-04-24
+Numero di telefono: +39 3510193601
+Nome: Fabia
+Cognome: Spinelli
+IBAN: IT29N7602287768536721922475
+Data: 2004-11-16
+Numero di telefono: 0332731933
+Nome: Gelsomina
+Cognome: Saracino
+IBAN: IT02J6573102255269998013286
+Data: 2021-12-24
+Numero di telefono: +39 35153873375

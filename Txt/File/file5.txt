@@ -1,0 +1,100 @@
+Nome: Edoardo
+Cognome: Antelami
+IBAN: IT49O6163634808681069498334
+Data: 1989-11-20
+Numero di telefono: +39 0363253486
+Nome: Sebastiano
+Cognome: Costanzi
+IBAN: IT35M9896570121618457144370
+Data: 2001-08-27
+Numero di telefono: 3301743599
+Nome: Ugolino
+Cognome: Bertoli
+IBAN: IT84Q3591592734279307145657
+Data: 2022-02-01
+Numero di telefono: 056473808
+Nome: Giovanni
+Cognome: Satta
+IBAN: IT24C1807505499683590534794
+Data: 1970-12-31
+Numero di telefono: 0922452722
+Nome: Leone
+Cognome: Grifeo
+IBAN: IT23G7403217513967249509811
+Data: 2013-01-09
+Numero di telefono: 377893400
+Nome: Tiziano
+Cognome: Napolitano
+IBAN: IT12F0472771320376458584707
+Data: 2011-04-24
+Numero di telefono: 082582572
+Nome: Rosa
+Cognome: Tommaseo
+IBAN: IT42Z1848435204448472931996
+Data: 2009-07-18
+Numero di telefono: 0322836474
+Nome: Gilberto
+Cognome: Filzi
+IBAN: IT12U1660683616486760966959
+Data: 1981-02-19
+Numero di telefono: +39 0396411509
+Nome: Riccardo
+Cognome: Pacetti
+IBAN: IT48D8590791039384079941533
+Data: 1980-03-15
+Numero di telefono: 3514886362
+Nome: Pina
+Cognome: Antonelli
+IBAN: IT24P6239170492784923761590
+Data: 2007-04-04
+Numero di telefono: +39 35052126540
+Nome: Nicola
+Cognome: Savorgnan
+IBAN: IT03W6937407252165336447483
+Data: 2016-07-29
+Numero di telefono: 034535067
+Nome: Puccio
+Cognome: Bonaventura
+IBAN: IT87W8561244885936100240303
+Data: 1997-10-13
+Numero di telefono: 0577068430
+Nome: Leone
+Cognome: Visintini
+IBAN: IT37M2594644123528770352965
+Data: 1992-09-07
+Numero di telefono: +39 03717431358
+Nome: Dolores
+Cognome: Beccaria
+IBAN: IT63Y0513440789328731532197
+Data: 1978-02-14
+Numero di telefono: 0736563686
+Nome: Torquato
+Cognome: Boccherini
+IBAN: IT17H2654400217189821766119
+Data: 2004-11-19
+Numero di telefono: +39 011367656
+Nome: Antonietta
+Cognome: Gualtieri
+IBAN: IT60W7266497879745857470015
+Data: 2008-02-27
+Numero di telefono: 3533621595
+Nome: Raimondo
+Cognome: Riccardi
+IBAN: IT27E8878708412773236324863
+Data: 1977-11-29
+Numero di telefono: 055118901
+Nome: Greco
+Cognome: Golino
+IBAN: IT17R8257710762525246885338
+Data: 2003-05-09
+Numero di telefono: 0401998093
+Nome: Roberta
+Cognome: Puglisi
+IBAN: IT64C3099129844994436978044
+Data: 2008-01-17
+Numero di telefono: 0823907936
+Nome: Ezio
+Cognome: Mogherini
+IBAN: IT73U8890346905838196235380
+Data: 1983-11-10
+Numero di telefono: +39 350154286
