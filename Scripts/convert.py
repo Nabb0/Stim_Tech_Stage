@@ -4,7 +4,7 @@ import os
 
 #?Covenrsione PDF in txt
 #!Conversione file
-def convert_pdfs_in_folder(file, i):
+def convert_pdfs_in_folder(file, n):
     # Apri il file PDF in modalità binaria
     with open(file, 'rb') as pdf_file:
         
@@ -28,7 +28,7 @@ def convert_pdfs_in_folder(file, i):
         text += page_text
 
     # Scrivi la stringa contenente il testo estratto in un file di testo
-    with open('Txt/File/file{}.txt'.format(i), 'w') as txt_file:
+    with open('Txt/File/{}.txt'.format(n), 'w') as txt_file:
         txt_file.write(text)
 
 def convert():
@@ -38,7 +38,8 @@ def convert():
     i = 1
     for file in file_list:
         file_path = os.path.join(directory, file)
-        convert_pdfs_in_folder(file_path, i)
+        file_name = os.path.splitext(os.path.basename(file_path))[0]
+        convert_pdfs_in_folder(file_path, file_name)
         i += 1
 
 
