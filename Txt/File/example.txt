@@ -1,0 +1,31 @@
+Esempio di PDF generato con Python
+
+Esempio di contenuti inventati
+
+Nome: Mario
+
+Cognome: Rossi
+
+IBAN: IT12A3456789012345678901234
+
+Data di nascita: 01/01/1990
+
+Numero di telefono: +39 1234567890
+
+Nome: Valentino
+
+Cognome: Riva
+
+IBAN: IT12A3456765412345678901234
+
+Data di nascita: 06/08/2005
+
+Numero di telefono: +39 0987654321
+
+
+
+
+
+
+
+Pagina 1
