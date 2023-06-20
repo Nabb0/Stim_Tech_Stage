@@ -36,7 +36,7 @@ def extract_context(text, keyword):
     # Estrai le tre parole precedenti e le tre parole successive alla parola chiave
     if found_keyword:
         start_index = max(0, keyword_index - 6)
-        end_index = min(keyword_index + 7, len(words))
+        end_index = min(keyword_index + 8, len(words))
 
         context_words = words[start_index:end_index]
 
@@ -62,8 +62,8 @@ def extract_special_context(text, keyword):
 
     # Estrai le tre parole precedenti e le tre parole successive al numero di telefono contenente la parola chiave
     if found_keyword:
-        start_index = max(0, keyword_index - 3)
-        end_index = min(keyword_index + 4, len(phone_numbers))
+        start_index = max(0, keyword_index - 6)
+        end_index = min(keyword_index + 8, len(phone_numbers))
 
         context_words = phone_numbers[start_index:end_index]
 
@@ -73,8 +73,14 @@ def extract_special_context(text, keyword):
 #?Check method
 def checkLists(oggetto):
     for value in oggetto.values(): #Primo ciclo prende i valori delle chiavi
-        for i in range(len(value)): #Secondo ciclo vede la lunghezza dei valori
-            print(value[i])
+        for i in range(len(value)):
+            for j in range(len(value[i])):
+                if isinstance(value[i][j], str):
+                    var1 = value[i][j]
+                    if isinstance(value[i + 1][j], list):
+                        for x in value[i + 1][j]:
+                            if var1 == x:
+                                print('match')
 
 
 #!Estrazione degli iban
@@ -248,9 +254,10 @@ def visPhoneNumbers(directory):
 
 def main():
     directory = "E:/informatica/Visual Studio Code Projects/py projects/Stim Script/Txt/File/"
-    oggetti = {'ibans': visIban(directory), 'codFis': visCodFisc(directory), 'nomi': visNome(directory), 'date': visDate(directory), 'num': visPhoneNumbers(directory)}
+    # oggetti = {'ibans': visIban(directory), 'codFis': visCodFisc(directory), 'nomi': visNome(directory), 'date': visDate(directory), 'num': visPhoneNumbers(directory)}
 
-    checkLists(oggetti)
+    oggetto = {'ibans' : visIban(directory)}
+    checkLists(oggetto)
     
     
 main()
