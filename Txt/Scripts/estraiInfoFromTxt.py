@@ -1,7 +1,6 @@
-import docxpy
-import phonenumbers
 import re
 import os
+import phonenumbers
 
 #!Metodi Generali
 #?Check list
@@ -17,7 +16,7 @@ def creaLista():
     return words_combined
 
 
-#?Estrai riga
+#?Estrai riga con parola senza spazi
 def extract_context(text, keyword):
     pattern = r"\b(\w+)\b"  # Pattern per estrarre le parole nel testo
 
@@ -44,9 +43,38 @@ def extract_context(text, keyword):
     return context_words
 
 
+#?Estrai riga con parola con spazi
+def extract_special_context(text, keyword):
+    pattern = r"(\b\+39\s*\d{2,3}\s*\d{2,3}\s*\d{2,4}\b|\b\d{2,3}\s*\d{2,3}\s*\d{2,4}\b)"  # Pattern per riconoscere numeri di telefono italiani
+
+    # Trova tutti i numeri di telefono nel testo
+    phone_numbers = re.findall(pattern, text)
+
+    context_words = []
+    found_keyword = False
+
+    # Trova l'indice del numero di telefono contenente la parola chiave nel testo
+    for i, phone_number in enumerate(phone_numbers):
+        if keyword in phone_number:
+            found_keyword = True
+            keyword_index = i
+            break
+
+    # Estrai le tre parole precedenti e le tre parole successive al numero di telefono contenente la parola chiave
+    if found_keyword:
+        start_index = max(0, keyword_index - 3)
+        end_index = min(keyword_index + 4, len(phone_numbers))
+
+        context_words = phone_numbers[start_index:end_index]
+
+    return context_words
+
+
 #?Check method
 def checkLists(oggetto):
-    print(oggetto)
+    for value in oggetto.values(): #Primo ciclo prende i valori delle chiavi
+        for i in range(len(value)): #Secondo ciclo vede la lunghezza dei valori
+            print(value[i])
 
 
 #!Estrazione degli iban
@@ -56,7 +84,7 @@ def extract_iban(text):
     ibans = re.findall(pattern, text)
     return ibans
 
-def extract_iban_from_docx(text):
+def extract_iban_from_txt(text):
     ibans = extract_iban(text)
     return ibans
 
@@ -65,16 +93,18 @@ def visIban(directory):
     listaRighe = []
     file_list = os.listdir(directory)
     for file in file_list:
-        file_path = os.path.join(directory, file)
-        text = docxpy.process(file_path)
-        ibans = extract_iban_from_docx(text)
-        lista.append(ibans)
+        if file.endswith(".txt"):
+            file_path = os.path.join(directory, file)
+            with open(file_path, 'r') as file:
+                text = file.read()
+            ibans = extract_iban_from_txt(text)
+            lista.append(ibans)
 
-        for iban in ibans:
-            context = extract_context(text, iban)
-            listaRighe.append(context)
-        lista.append(listaRighe)
-        
+            for iban in ibans:
+                context = extract_context(text, iban)
+                listaRighe.append(context)
+            lista.append(listaRighe)
+            
     return lista
 
 
@@ -85,7 +115,7 @@ def extract_codice_fiscale(text):
     codici_fiscali = re.findall(pattern, text)
     return codici_fiscali
 
-def extract_codice_fiscale_from_docx(text):
+def extract_codice_fiscale_from_txt(text):
     codici_fiscali = extract_codice_fiscale(text)
     return codici_fiscali
 
@@ -94,17 +124,18 @@ def visCodFisc(directory):
     listaRighe = []
     file_list = os.listdir(directory)
     for file in file_list:
-        file_path = os.path.join(directory, file)
-        text = docxpy.process(file_path)
-        codici_fiscali = extract_codice_fiscale_from_docx(text)
-        lista.append(codici_fiscali)
+        if file.endswith(".txt"):
+            file_path = os.path.join(directory, file)
+            with open(file_path, 'r') as file:
+                text = file.read()
+            codici_fiscali = extract_codice_fiscale_from_txt(text)
+            lista.append(codici_fiscali)
 
-        # Print the extracted codici_fiscali
-        for codice_fiscale in codici_fiscali:
-            context = extract_context(text, codice_fiscale)
-            listaRighe.append(context)
-        lista.append(listaRighe)
-    
+            for codice_fiscale in codici_fiscali:
+                context = extract_context(text, codice_fiscale)
+                listaRighe.append(context)
+            lista.append(listaRighe)
+
     return lista
 
 
@@ -125,7 +156,7 @@ def extract_nomi(text):
         j += 1
     return lista
 
-def extract_nomi_from_docx(text):
+def extract_nomi_from_txt(text):
     nomi = extract_nomi(text)
     return nomi
 
@@ -134,28 +165,29 @@ def visNome(directory):
     listaRighe = []
     file_list = os.listdir(directory)
     for file in file_list:
-        file_path = os.path.join(directory, file)
-        text = docxpy.process(file_path)
-        nomi = extract_nomi_from_docx(text)
-        lista.append(nomi)
+        if file.endswith(".txt"):
+            file_path = os.path.join(directory, file)
+            with open(file_path, 'r') as file:
+                text = file.read()
+            nomi = extract_nomi_from_txt(text)
+            lista.append(nomi)
+           
+            for nome in nomi:
+                context = extract_context(text, nome)
+                listaRighe.append(context)
+            lista.append(listaRighe)
 
-        # Print the extracted codici_fiscali
-        for nome in nomi:
-            context = extract_context(text, nome)
-            listaRighe.append(context)
-        lista.append(listaRighe)
-    
     return lista
 
 
 #!Estrazione Date
 def extract_dates_from_text(text):
-    pattern = r"\b\d{2}[-/]\d{2}[-/]\d{4}\b"  # Pattern to recognize dates in "dd/mm/yyyy" or "dd-mm-yyyy" format
+    pattern = r"\b\d{4}[-/]\d{2}[-/]\d{2}\b"  # Pattern to recognize dates in "dd/mm/yyyy" or "dd-mm-yyyy" format
 
     dates = re.findall(pattern, text)
     return dates
 
-def extract_dates_from_file(text):
+def extract_dates_from_txt(text):
     dates = extract_dates_from_text(text)
     return dates
 
@@ -164,16 +196,17 @@ def visDate(directory):
     listaRighe = []
     file_list = os.listdir(directory)
     for file in file_list:
-        file_path = os.path.join(directory, file)
-        text = docxpy.process(file_path)
-        dates = extract_dates_from_file(text)
-        lista.append(dates)
+        if file.endswith(".txt"):
+            file_path = os.path.join(directory, file)
+            with open(file_path, 'r') as file:
+                text = file.read()
+            dates = extract_dates_from_txt(text)
+            lista.append(dates)
 
-        # Print the extracted codici_fiscali
-        for date in dates:
-            context = extract_context(text, date)
-            listaRighe.append(context)
-        lista.append(listaRighe)
+            for date in dates:
+                context = extract_special_context(text, date)
+                listaRighe.append(context)
+            lista.append(listaRighe)
     
     return lista
 
@@ -189,7 +222,7 @@ def extract_phone_numbers_from_text(text):
 
     return phone_numbers
 
-def extract_phone_numbers_from_file(text):
+def extract_phone_numbers_from_txt(text):
     phone_numbers = extract_phone_numbers_from_text(text)
     return phone_numbers
 
@@ -198,22 +231,23 @@ def visPhoneNumbers(directory):
     listaRighe = []
     file_list = os.listdir(directory)
     for file in file_list:
-        file_path = os.path.join(directory, file)
-        text = docxpy.process(file_path)
-        phone_numbers = extract_phone_numbers_from_file(text)
-        lista.append(phone_numbers)
+        if file.endswith(".txt"):
+            file_path = os.path.join(directory, file)
+            with open(file_path, 'r') as file:
+                text = file.read()
+            phone_numbers = extract_phone_numbers_from_txt(text)
+            lista.append(phone_numbers)
 
-        # Print the extracted codici_fiscali
-        for phone_number in phone_numbers:
-            context = extract_context(text, phone_number)
-            listaRighe.append(context)
-        lista.append(listaRighe)
+            for phone_number in phone_numbers:
+                context = extract_special_context(text, phone_number)
+                listaRighe.append(context)
+            lista.append(listaRighe)
     
     return lista
 
 
 def main():
-    directory = "E:/informatica/Visual Studio Code Projects/py projects/Stim Script/Docx/File/"
+    directory = "E:/informatica/Visual Studio Code Projects/py projects/Stim Script/Txt/File/"
     oggetti = {'ibans': visIban(directory), 'codFis': visCodFisc(directory), 'nomi': visNome(directory), 'date': visDate(directory), 'num': visPhoneNumbers(directory)}
 
     checkLists(oggetti)

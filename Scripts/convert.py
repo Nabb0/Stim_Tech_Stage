@@ -1,9 +1,10 @@
 import fitz 
+import docxpy
 import io
 import os
 
-#?Covenrsione PDF in txt
 #!Conversione file
+#?Covenrsione PDF in txt
 def convert_pdfs_in_folder(file, n):
     # Apri il file PDF in modalità binaria
     with open(file, 'rb') as pdf_file:
@@ -31,7 +32,7 @@ def convert_pdfs_in_folder(file, n):
     with open('Txt/File/{}.txt'.format(n), 'w') as txt_file:
         txt_file.write(text)
 
-def convert():
+def convertPdfTxt():
     directory = "E:/informatica/Visual Studio Code Projects/py projects/Stim Script/Pdf/File/"
 
     file_list = os.listdir(directory)
@@ -43,8 +44,30 @@ def convert():
         i += 1
 
 
+#?Covenrsione Word in txt
+def convert_docx_to_txt(docx_file, n):
+    # Leggi il contenuto del file DOCX
+    text = docxpy.process(docx_file)
+
+    # Scrivi il testo estratto in un file di testo
+    with open('Txt/File/{}.txt'.format(n), 'w') as file:
+        file.write(text)
+
+def convertDocxTxt():
+    directory = "E:/informatica/Visual Studio Code Projects/py projects/Stim Script/Docx/File/"
+
+    file_list = os.listdir(directory)
+    i = 1
+    for file in file_list:
+        file_path = os.path.join(directory, file)
+        file_name = os.path.splitext(os.path.basename(file_path))[0]
+        convert_docx_to_txt(file_path, file_name)
+        i += 1
+
+
 def main():
-    convert()
+    convertPdfTxt()
+    convertDocxTxt()
 
 
 main()
