@@ -18,6 +18,7 @@ def creaLista():
 
 #?Trova la stringa passata nel testo
 def find_string_in_text(strings, file_path):
+    num = 2
     lAssociazioni = []
     with open(file_path, 'r') as file:
         text = file.readlines()
@@ -29,40 +30,37 @@ def find_string_in_text(strings, file_path):
                     lAssociazioni.append([text[i-2].rstrip('\n'), text[i-1].rstrip('\n'), line.rstrip('\n')])
     
     for i in range(len(lAssociazioni)):
-        add_to_excel(lAssociazioni[i])
-
+        add_to_excel(lAssociazioni[i], num)
+        num += 1
+        
 #?Aggiungi a excel
-def add_to_excel(list):
+def add_to_excel(list, n):
     # Creazione del nuovo file Excel
-    workbook = openpyxl.Workbook()
-    sheet = workbook.active
+    try:
+        workbook = openpyxl.load_workbook("E:/informatica/Visual Studio Code Projects/py projects/Stim Script/Excel/File/Output/output.xlsx")
+        sheet = workbook.active
+    except FileNotFoundError:
+        workbook = openpyxl.Workbook()
+        sheet = workbook.active
+        # Intestazioni delle colonne
+        column_headers = ["Nome", "Cognome", "IBAN"]
+        sheet.append(column_headers)
 
-    # Intestazioni delle colonne
-    column_headers = ["Nome", "Cognome", "IBAN"]
-    sheet.append(column_headers)
 
-    # Popolamento delle colonne con i dati
-    for i, data in enumerate(list):
-        info = data.split()
-        nome = ""
-        cognome = ""
-        iban = ""
+    for item in list:
+        info = item.split(":")
+        if item.startswith("Nome:"):
+            nome = info[1]
+            sheet.cell(row=n, column=1).value = nome
+        elif item.startswith("Cognome:"):
+            cognome = info[1]
+            sheet.cell(row=n, column=2).value = cognome
+        elif item.startswith("IBAN:"):
+            iban = info[1]
+            sheet.cell(row=n, column=3).value = iban
 
-        # Estrazione delle informazioni dal testo
-        for item in info:
-            if item.startswith("Nome:"):
-                nome = info[1]
-                # Scrittura dei dati nelle colonne
-                sheet.cell(row=i+2, column=1).value = nome.strip('\n')
-            elif item.startswith("Cognome:"):
-                cognome = info[1]
-                sheet.cell(row=i+2, column=2).value = cognome.strip('\n')
-            elif item.startswith("IBAN:"):
-                iban = info[1]
-                sheet.cell(row=i+2, column=3).value = iban.strip('\n')
-
-    # Salvataggio del file Excel
-    workbook.save("Excel/File/Output/output.xlsx")
+    workbook.save("E:/informatica/Visual Studio Code Projects/py projects/Stim Script/Excel/File/Output/output.xlsx")
+    workbook.close()
 
 
 #!Estrazione degli iban
