@@ -1,0 +1,13 @@
+Il codice è scritto in Python e utilizza le librerie PyMuPDF e docxpy per convertire i file PDF e DOCX in file di testo (.txt).
+
+La funzione convert_pdfs_in_folder prende in input il percorso del file PDF e un numero intero n che viene utilizzato per generare il nome del file di testo corrispondente. Viene quindi aperto il file PDF in modalità binaria e viene creato un oggetto lettore PyMuPDF per il file. Viene inizializzata una stringa vuota per contenere il testo estratto dal file PDF e viene utilizzato un ciclo for per estrarre il testo da ogni pagina del PDF. Infine, viene scritta la stringa contenente il testo estratto in un file di testo con nome "n.txt".
+
+La funzione convertPdfTxt viene utilizzata per convertire tutti i file PDF nella directory "Pdf/File" in file di testo. Viene utilizzata la funzione os.listdir per ottenere una lista di tutti i file nella directory e viene utilizzata una list comprehension per selezionare solo i file con estensione ".pdf". Viene quindi utilizzato un ciclo for per chiamare la funzione convert_pdfs_in_folder per ogni nome di file nella lista.
+
+La funzione convert_docx_to_txt prende in input il percorso del file DOCX e un numero intero n che viene utilizzato per generare il nome del file di testo corrispondente. Viene quindi utilizzata la funzione docxpy.process per leggere il contenuto del file DOCX e viene scritto il testo estratto in un file di testo con nome "n.txt".
+
+La funzione convertDocxTxt viene utilizzata per convertire tutti i file DOCX nella directory "Docx/File" in file di testo. Viene utilizzata la funzione os.listdir per ottenere una lista di tutti i file nella directory e viene utilizzata una list comprehension per selezionare solo i file con estensione ".docx". Viene quindi utilizzato un ciclo for per chiamare la funzione convert_docx_to_txt per ogni nome di file nella lista.
+
+Infine, la funzione main viene utilizzata per chiamare le funzioni convertPdfTxt e convertDocxTxt per convertire tutti i file PDF e DOCX nella directory specificata in file di testo.
+
+Il codice è ben strutturato e utilizza in modo efficace le librerie PyMuPDF e docxpy per convertire i file PDF e DOCX in file di testo. Tuttavia, sarebbe stato utile includere anche controlli di errore per gestire eventuali problemi durante la conversione dei file. Inoltre, sarebbe stato utile includere anche un'opzione per specificare la directory di destinazione in cui salvare i file di testo, invece di salvare i file nella directory corrente con nomi fissi.

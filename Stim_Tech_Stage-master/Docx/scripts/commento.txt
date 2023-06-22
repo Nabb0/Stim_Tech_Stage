@@ -1,0 +1,22 @@
+Il codice è scritto in Python e contiene diverse funzioni per estrarre informazioni da documenti in formato docx presenti in una specifica directory.
+
+Le funzioni principali sono:
+
+creaLista: Crea una lista di parole chiave utili per l'estrazione di informazioni dai documenti.
+extract_context: Estrae le parole circostanti una parola chiave all'interno di un testo.
+extract_iban: Estrae tutti i numeri di IBAN presenti all'interno di un testo.
+extract_iban_from_docx: Estrae tutti i numeri di IBAN presenti in un documento docx.
+visIban: Estrae tutti i numeri di IBAN presenti in tutti i documenti docx presenti in una specifica directory e restituisce una lista contenente tali numeri di IBAN e le parole circostanti.
+extract_codice_fiscale: Estrae tutti i codici fiscali italiani presenti all'interno di un testo.
+extract_codice_fiscale_from_docx: Estrae tutti i codici fiscali italiani presenti in un documento docx.
+visCodFisc: Estrae tutti i codici fiscali italiani presenti in tutti i documenti docx presenti in una specifica directory e restituisce una lista contenente tali codici fiscali e le parole circostanti.
+extract_nomi: Estrae tutti i nomi e cognomi presenti all'interno di un testo.
+extract_nomi_from_docx: Estrae tutti i nomi e cognomi presenti in un documento docx.
+visNome: Estrae tutti i nomi e cognomi presenti in tutti i documenti docx presenti in una specifica directory e restituisce una lista contenente tali nomi e cognomi e le parole circostanti.
+extract_dates_from_text: Estrae tutte le date presenti all'interno di un testo.
+extract_dates_from_file: Estrae tutte le date presenti in un documento docx.
+visDate: Estrae tutte le date presenti in tutti i documenti docx presenti in una specifica directory e restituisce una lista contenente tali date e le parole circostanti.
+extract_phone_numbers_from_text: Estrae tutti i numeri di telefono italiani presenti all'interno di un testo.
+extract_phone_numbers_from_file: Estrae tutti i numeri di telefono italiani presenti in un documento docx.
+visPhoneNumbers: Estrae tutti i numeri di telefono italiani presenti in tutti i documenti docx presenti in una specifica directory e restituisce una lista contenente tali numeri di telefono e le parole circostanti.
+La funzione main richiama tutte le funzioni di estrazione e stampa i risultati.
