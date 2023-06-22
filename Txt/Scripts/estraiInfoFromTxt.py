@@ -1,6 +1,6 @@
 import re
 import os
-from openpyxl import Workbook
+import openpyxl
 import phonenumbers
 
 #!Metodi Generali
@@ -16,66 +16,53 @@ def creaLista():
 
     return words_combined
 
-#?Find info in phrases with a string that is given
-def saveInfo():
-    with open('E:/informatica/Visual Studio Code Projects/py projects/Stim Script/Txt/Output/output.txt', 'r') as file:
-        lines = file.readlines()
-
-    found_words = []
-    for i in range(0, len(lines), 4): # For che prende i dati ogni ogni tre righe
-        words = lines[i].split()
-        for word in words:
-            if word.isupper() or (word[0].isupper() and word[1:].islower()):
-                found_words.append(word)
-
-    return found_words
-
-def find_information(lines, search_string):
-    found_lines = []
-    for i, line in enumerate(lines):
-        if search_string in line:
-            found_lines = lines[max(0, i - 2):i + 1]
-            break
-
-    if found_lines:
-        output_file_path = "E:/informatica/Visual Studio Code Projects/py projects/Stim Script/Txt/Output/output.txt"  # Specify the desired output file path
-        with open(output_file_path, 'a') as output_file:
-            output_file.write('\n'.join(found_lines) + '\n')
-    
-    found_words = saveInfo()
-    return found_words
-
-def find_sentence_with_string(file_path, search_string):
+#?Trova la stringa passata nel testo
+def find_string_in_text(strings, file_path):
+    lAssociazioni = []
     with open(file_path, 'r') as file:
-        text = file.read()
+        text = file.readlines()
 
-    sentences = re.split(r'\n', text)
-    for sentence in sentences:
-        if search_string.lower() in sentence.lower():
-            found_words = find_information(sentences, sentence.strip())
+    for string in strings:
+        for i, line in enumerate(text):
+            if string in line:
+                if i >= 2:  # Assicurati che ci siano almeno due linee precedenti
+                    lAssociazioni.append([text[i-2].rstrip('\n'), text[i-1].rstrip('\n'), line.rstrip('\n')])
     
-    add_data_to_excel(found_words)
-    
-#?Save data in excel
-def add_data_to_excel(data_list):
-    checkList = creaLista()
-    workbook = Workbook()
+    for i in range(len(lAssociazioni)):
+        add_to_excel(lAssociazioni[i])
+
+#?Aggiungi a excel
+def add_to_excel(list):
+    # Creazione del nuovo file Excel
+    workbook = openpyxl.Workbook()
     sheet = workbook.active
 
-    # Set column headers
+    # Intestazioni delle colonne
     column_headers = ["Nome", "Cognome", "IBAN"]
     sheet.append(column_headers)
 
-    # Add data to corresponding columns
-    for item in range(len(data_list)):
-        nome = data_list[item + 1] if data_list[item].startswith("Nome:") else ""
-        cognome = data_list[item + 1] if data_list[item].startswith("Cognome:") else ""
-        iban = data_list[item + 1] if data_list[item].startswith("IBAN:") else ""
+    # Popolamento delle colonne con i dati
+    for i, data in enumerate(list):
+        info = data.split()
+        nome = ""
+        cognome = ""
+        iban = ""
 
-        sheet.append([nome, cognome, iban])
+        # Estrazione delle informazioni dal testo
+        for item in info:
+            if item.startswith("Nome:"):
+                nome = info[1]
+                # Scrittura dei dati nelle colonne
+                sheet.cell(row=i+2, column=1).value = nome.strip('\n')
+            elif item.startswith("Cognome:"):
+                cognome = info[1]
+                sheet.cell(row=i+2, column=2).value = cognome.strip('\n')
+            elif item.startswith("IBAN:"):
+                iban = info[1]
+                sheet.cell(row=i+2, column=3).value = iban.strip('\n')
 
-    # Save the workbook
-    workbook.save("E:/informatica/Visual Studio Code Projects/py projects/Stim Script/Excel/File/Output/output.xlsx")
+    # Salvataggio del file Excel
+    workbook.save("Excel/File/Output/output.xlsx")
 
 
 #!Estrazione degli iban
@@ -98,8 +85,7 @@ def visIban(directory):
                 text = file.read()
             ibans = extract_iban_from_txt(text)
 
-            for iban in ibans:
-                find_sentence_with_string(file_path, iban)
+            find_string_in_text(ibans, file_path)
 
 
 #!Estrazione codice fiscale
@@ -121,9 +107,6 @@ def visCodFisc(directory):
             with open(file_path, 'r') as file:
                 text = file.read()
             codici_fiscali = extract_codice_fiscale_from_txt(text)
-
-            for codice_fiscale in codici_fiscali:
-                find_sentence_with_string(codice_fiscale)
 
 
 #!Estrazione Nome e Cognome
