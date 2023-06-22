@@ -9,7 +9,7 @@ IBAN: IT18W8034292104481328055001
 Data: 2021-01-18
 Numero di telefono: +39 057245552
 Nome: Donato
-Cognome: Berrè
+Cognome: Berrï¿½
 IBAN: IT46C0861777507940288399049
 Data: 1987-02-07
 Numero di telefono: +39 016575440

@@ -1,11 +1,12 @@
 import re
 import os
+from openpyxl import Workbook
 import phonenumbers
 
 #!Metodi Generali
 #?Check list
 def creaLista():
-    words = ["Nome:", "Cognome:", "Mittente:", "Destinatario:", "Richiedente:", "Firmatario:", "Testimone:", "Notaio:", "Debitore:", "Creditore:", "Procuratore:", "Beneficiario:", "Garante:", "Contraente:", "Testatore:", "Beneficiario effettivo:", "Amministratore:", "Titolare:", "Proprietario:", "Inquilino:", "Reclamante:", "Responsabile legale:", "Agente:", "Giudice:", "Avvocato:", "Proponente:", "Curatore:", "Supplente:", "Padrone di casa:", "Testimone oculare:", "Assicurato:", "Beneficiario fiduciario:", "Beneficiario di polizza:", "Coobbligato:", "Curatore speciale:", "Datore di lavoro:", "Difensore:", "Donante:", "Esecutore testamentario:", "Garante finanziario:", "Garante solidale:", "Intermediario:", "Legatario:", "Mediatore:", "Perito:", "Premiante:", "Promittente:", "Proposto:", "Referente:", "Richiedente asilo:", "Soggetto obbligato:", "Testimone esperto:", "Tribunale:", "Ufficiale pubblico:", "Valutatore:", "Venditore:", "Acquirente:", "Conduttore:", "Lasciatario:", "Locatore:", "Concessionario:", "Contraente principale:", "Contraente secondario:", "Locatario:", "Mandante:", "Mandatario:", "Offerta:", "Ricevente:", "Sofferente:", "Subappaltatore:", "Subentrante:", "Sublocatario:", "Sublocatore:", "Testimone di nozze:", "Promittente venditore:", "Promissario acquirente:"]
+    words = ["Nome:", "Cognome:", "IBAN:", "Mittente:", "Destinatario:", "Richiedente:", "Firmatario:", "Testimone:", "Notaio:", "Debitore:", "Creditore:", "Procuratore:", "Beneficiario:", "Garante:", "Contraente:", "Testatore:", "Beneficiario effettivo:", "Amministratore:", "Titolare:", "Proprietario:", "Inquilino:", "Reclamante:", "Responsabile legale:", "Agente:", "Giudice:", "Avvocato:", "Proponente:", "Curatore:", "Supplente:", "Padrone di casa:", "Testimone oculare:", "Assicurato:", "Beneficiario fiduciario:", "Beneficiario di polizza:", "Coobbligato:", "Curatore speciale:", "Datore di lavoro:", "Difensore:", "Donante:", "Esecutore testamentario:", "Garante finanziario:", "Garante solidale:", "Intermediario:", "Legatario:", "Mediatore:", "Perito:", "Premiante:", "Promittente:", "Proposto:", "Referente:", "Richiedente asilo:", "Soggetto obbligato:", "Testimone esperto:", "Tribunale:", "Ufficiale pubblico:", "Valutatore:", "Venditore:", "Acquirente:", "Conduttore:", "Lasciatario:", "Locatore:", "Concessionario:", "Contraente principale:", "Contraente secondario:", "Locatario:", "Mandante:", "Mandatario:", "Offerta:", "Ricevente:", "Sofferente:", "Subappaltatore:", "Subentrante:", "Sublocatario:", "Sublocatore:", "Testimone di nozze:", "Promittente venditore:", "Promissario acquirente:"]
 
     # Duplica le parole senza i due punti
     words_no_colon = [word.replace(":", "") for word in words]
@@ -15,72 +16,66 @@ def creaLista():
 
     return words_combined
 
+#?Find info in phrases with a string that is given
+def saveInfo():
+    with open('E:/informatica/Visual Studio Code Projects/py projects/Stim Script/Txt/Output/output.txt', 'r') as file:
+        lines = file.readlines()
 
-#?Estrai riga con parola senza spazi
-def extract_context(text, keyword):
-    pattern = r"\b(\w+)\b"  # Pattern per estrarre le parole nel testo
+    found_words = []
+    for i in range(0, len(lines), 4): # For che prende i dati ogni ogni tre righe
+        words = lines[i].split()
+        for word in words:
+            if word.isupper() or (word[0].isupper() and word[1:].islower()):
+                found_words.append(word)
 
-    # Trova tutte le parole nel testo
-    words = re.findall(pattern, text)
+    return found_words
 
-    context_words = []
-    found_keyword = False
-
-    # Trova l'indice della parola chiave nel testo
-    for i, word in enumerate(words):
-        if word == keyword:
-            found_keyword = True
-            keyword_index = i
+def find_information(lines, search_string):
+    found_lines = []
+    for i, line in enumerate(lines):
+        if search_string in line:
+            found_lines = lines[max(0, i - 2):i + 1]
             break
 
-    # Estrai le tre parole precedenti e le tre parole successive alla parola chiave
-    if found_keyword:
-        start_index = max(0, keyword_index - 6)
-        end_index = min(keyword_index + 8, len(words))
+    if found_lines:
+        output_file_path = "E:/informatica/Visual Studio Code Projects/py projects/Stim Script/Txt/Output/output.txt"  # Specify the desired output file path
+        with open(output_file_path, 'a') as output_file:
+            output_file.write('\n'.join(found_lines) + '\n')
+    
+    found_words = saveInfo()
+    return found_words
 
-        context_words = words[start_index:end_index]
+def find_sentence_with_string(file_path, search_string):
+    with open(file_path, 'r') as file:
+        text = file.read()
 
-    return context_words
+    sentences = re.split(r'\n', text)
+    for sentence in sentences:
+        if search_string.lower() in sentence.lower():
+            found_words = find_information(sentences, sentence.strip())
+    
+    add_data_to_excel(found_words)
+    
+#?Save data in excel
+def add_data_to_excel(data_list):
+    checkList = creaLista()
+    workbook = Workbook()
+    sheet = workbook.active
 
+    # Set column headers
+    column_headers = ["Nome", "Cognome", "IBAN"]
+    sheet.append(column_headers)
 
-#?Estrai riga con parola con spazi
-def extract_special_context(text, keyword):
-    pattern = r"(\b\+39\s*\d{2,3}\s*\d{2,3}\s*\d{2,4}\b|\b\d{2,3}\s*\d{2,3}\s*\d{2,4}\b)"  # Pattern per riconoscere numeri di telefono italiani
+    # Add data to corresponding columns
+    for item in range(len(data_list)):
+        nome = data_list[item + 1] if data_list[item].startswith("Nome:") else ""
+        cognome = data_list[item + 1] if data_list[item].startswith("Cognome:") else ""
+        iban = data_list[item + 1] if data_list[item].startswith("IBAN:") else ""
 
-    # Trova tutti i numeri di telefono nel testo
-    phone_numbers = re.findall(pattern, text)
+        sheet.append([nome, cognome, iban])
 
-    context_words = []
-    found_keyword = False
-
-    # Trova l'indice del numero di telefono contenente la parola chiave nel testo
-    for i, phone_number in enumerate(phone_numbers):
-        if keyword in phone_number:
-            found_keyword = True
-            keyword_index = i
-            break
-
-    # Estrai le tre parole precedenti e le tre parole successive al numero di telefono contenente la parola chiave
-    if found_keyword:
-        start_index = max(0, keyword_index - 6)
-        end_index = min(keyword_index + 8, len(phone_numbers))
-
-        context_words = phone_numbers[start_index:end_index]
-
-    return context_words
-
-
-#?Check method
-def checkLists(oggetto):
-    for value in oggetto.values(): #Primo ciclo prende i valori delle chiavi
-        for i in range(len(value)):
-            for j in range(len(value[i])):
-                if isinstance(value[i][j], str):
-                    var1 = value[i][j]
-                    if isinstance(value[i + 1][j], list):
-                        for x in value[i + 1][j]:
-                            if var1 == x:
-                                print('match')
+    # Save the workbook
+    workbook.save("E:/informatica/Visual Studio Code Projects/py projects/Stim Script/Excel/File/Output/output.xlsx")
 
 
 #!Estrazione degli iban
@@ -95,8 +90,6 @@ def extract_iban_from_txt(text):
     return ibans
 
 def visIban(directory):
-    lista = []
-    listaRighe = []
     file_list = os.listdir(directory)
     for file in file_list:
         if file.endswith(".txt"):
@@ -104,14 +97,9 @@ def visIban(directory):
             with open(file_path, 'r') as file:
                 text = file.read()
             ibans = extract_iban_from_txt(text)
-            lista.append(ibans)
 
             for iban in ibans:
-                context = extract_context(text, iban)
-                listaRighe.append(context)
-            lista.append(listaRighe)
-            
-    return lista
+                find_sentence_with_string(file_path, iban)
 
 
 #!Estrazione codice fiscale
@@ -126,8 +114,6 @@ def extract_codice_fiscale_from_txt(text):
     return codici_fiscali
 
 def visCodFisc(directory):
-    lista = []
-    listaRighe = []
     file_list = os.listdir(directory)
     for file in file_list:
         if file.endswith(".txt"):
@@ -135,14 +121,9 @@ def visCodFisc(directory):
             with open(file_path, 'r') as file:
                 text = file.read()
             codici_fiscali = extract_codice_fiscale_from_txt(text)
-            lista.append(codici_fiscali)
 
             for codice_fiscale in codici_fiscali:
-                context = extract_context(text, codice_fiscale)
-                listaRighe.append(context)
-            lista.append(listaRighe)
-
-    return lista
+                find_sentence_with_string(codice_fiscale)
 
 
 #!Estrazione Nome e Cognome
@@ -167,8 +148,6 @@ def extract_nomi_from_txt(text):
     return nomi
 
 def visNome(directory):
-    lista = []
-    listaRighe = []
     file_list = os.listdir(directory)
     for file in file_list:
         if file.endswith(".txt"):
@@ -176,14 +155,6 @@ def visNome(directory):
             with open(file_path, 'r') as file:
                 text = file.read()
             nomi = extract_nomi_from_txt(text)
-            lista.append(nomi)
-           
-            for nome in nomi:
-                context = extract_context(text, nome)
-                listaRighe.append(context)
-            lista.append(listaRighe)
-
-    return lista
 
 
 #!Estrazione Date
@@ -198,8 +169,6 @@ def extract_dates_from_txt(text):
     return dates
 
 def visDate(directory):
-    lista = []
-    listaRighe = []
     file_list = os.listdir(directory)
     for file in file_list:
         if file.endswith(".txt"):
@@ -207,14 +176,6 @@ def visDate(directory):
             with open(file_path, 'r') as file:
                 text = file.read()
             dates = extract_dates_from_txt(text)
-            lista.append(dates)
-
-            for date in dates:
-                context = extract_special_context(text, date)
-                listaRighe.append(context)
-            lista.append(listaRighe)
-    
-    return lista
 
 
 #!Estrai numero di telefono
@@ -233,8 +194,6 @@ def extract_phone_numbers_from_txt(text):
     return phone_numbers
 
 def visPhoneNumbers(directory):
-    lista = []
-    listaRighe = []
     file_list = os.listdir(directory)
     for file in file_list:
         if file.endswith(".txt"):
@@ -242,22 +201,11 @@ def visPhoneNumbers(directory):
             with open(file_path, 'r') as file:
                 text = file.read()
             phone_numbers = extract_phone_numbers_from_txt(text)
-            lista.append(phone_numbers)
-
-            for phone_number in phone_numbers:
-                context = extract_special_context(text, phone_number)
-                listaRighe.append(context)
-            lista.append(listaRighe)
-    
-    return lista
 
 
 def main():
     directory = "E:/informatica/Visual Studio Code Projects/py projects/Stim Script/Txt/File/"
-    # oggetti = {'ibans': visIban(directory), 'codFis': visCodFisc(directory), 'nomi': visNome(directory), 'date': visDate(directory), 'num': visPhoneNumbers(directory)}
-
-    oggetto = {'ibans' : visIban(directory)}
-    checkLists(oggetto)
+    visIban(directory)
     
     
 main()
